@@ -3,6 +3,7 @@ import pandas as pd
 from models import get_ai_response
 from symptom_processor import process_symptoms
 
+# Configure the page
 st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
 # Custom CSS to handle both light and dark modes
@@ -15,8 +16,8 @@ st.markdown("""
     .dark .reportview-container {
         background-color: #0A0E14;
     }
-
-     /* Default styles for title and subheader */
+    
+    /* Default styles for title and subheader */
     h1 {
         text-align: center;
         font-size: 1.2rem;
@@ -27,7 +28,6 @@ st.markdown("""
         font-size: 1rem;
         opacity: 0.5;
     }
-
     @media (max-width: 480px) {
         h1 {
             font-size: 1rem;
@@ -36,7 +36,7 @@ st.markdown("""
             font-size: 0.9rem;
         }
     }
-
+    
     /* Input Fields */
     .stTextInput > div, .stNumberInput > div {
         max-width: 300px !important;
@@ -52,13 +52,13 @@ st.markdown("""
         border: 1px solid #404040 !important;
         color: #E0E0E0 !important;
     }
-
+    
     /* Text Area */
     .stTextArea textarea {
         min-height: 70px !important;
         border-radius: 15px !important;
     }
-
+    
     /* Containers */
     .stContainer {
         border-radius: 12px;
@@ -71,7 +71,7 @@ st.markdown("""
         background-color: #1A1A1A;
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
-
+    
     /* Buttons */
     .stButton button {
         background-color: #2A9D8F !important;
@@ -89,7 +89,7 @@ st.markdown("""
     .dark .stButton button {
         background-color: #3DB4A4 !important;
     }
-
+    
     /* Footer links */
     .footer {
         text-align: center;
@@ -104,12 +104,14 @@ st.markdown("""
     .footer a:hover {
         text-decoration: underline;
     }
-</style>
+    </style>
 """, unsafe_allow_html=True)
 
+# App Title and Subheader
 st.title("🧳AI-Powered Health Assistant")
 st.subheader("How can I assist you today?")
 
+# Lazy-loaded health data function
 @st.cache_data
 def load_health_data():
     try:
@@ -118,8 +120,7 @@ def load_health_data():
         st.error(f"Error loading health data: {str(e)}")
         return None
 
-df_health = load_health_data()
-
+# User input for health/fitness questions
 user_input = st.text_area(
     "",
     placeholder="Describe your symptoms or ask about health/fitness advice...",
@@ -127,13 +128,16 @@ user_input = st.text_area(
     key="user_input"
 )
 
+# When the user clicks "Send", load the health data if needed and process the query
 if st.button("Send", key="query_button"):
     if user_input.strip():
         st.markdown("### **AI Response:**")
-        with st.spinner("processing..."):
+        with st.spinner("Processing..."):
+            # Lazy load the health data on button click
+            df_health = load_health_data()
+            
             if df_health is not None:
                 detected_symptoms, advice = process_symptoms(user_input, df_health)
-
                 if detected_symptoms:
                     st.markdown(f"**Detected Symptoms:** {', '.join(detected_symptoms)}")
                     st.markdown("**Recommendation:**")
@@ -146,11 +150,11 @@ if st.button("Send", key="query_button"):
                 st.warning("Symptom database not available. Using AI response only.")
                 ai_response = get_ai_response(user_input)
                 st.success(ai_response)
-
         st.markdown("---\n*Remember: This is not medical advice. Always consult a professional Doctor for serious concerns.*")
     else:
         st.warning("Please enter your symptoms or question.")
 
+# Fitness Tracking Section for BMI Calculation
 st.markdown("### **Fitness Tracking: Calculate Your BMI**")
 weight = st.number_input("Enter your weight (kg):", min_value=1.0, format="%.1f")
 height = st.number_input("Enter your height (m):", min_value=0.5, format="%.2f")
@@ -159,7 +163,6 @@ if st.button("Calculate BMI", key="bmi_button"):
     if weight > 0 and height > 0:
         bmi = weight / (height ** 2)
         st.success(f"Your BMI is {bmi:.2f}")
-
         if bmi < 18.5:
             st.info("You are underweight. Consider a balanced diet and consult a healthcare professional.")
         elif 18.5 <= bmi < 24.9:
@@ -176,7 +179,10 @@ st.caption("Stay safe and healthy! ✨")
 # Footer Section
 st.markdown("""
     <div class="footer">
-        <p> <a href="https://x.com/M_Codes6" target="_blank">X</a> | <a href="https://github.com/M-Codes6" target="_blank">Github</a> | <a href="mailto:naikmuzamil06@gmail.com" target="_blank">G-mail</a>
+        <p>
+            <a href="https://x.com/M_Codes6" target="_blank">X</a> | 
+            <a href="https://github.com/M-Codes6" target="_blank">Github</a> | 
+            <a href="mailto:naikmuzamil06@gmail.com" target="_blank">G-mail</a>
+        </p>
     </div>
 """, unsafe_allow_html=True)
-
