@@ -3,12 +3,17 @@ import pandas as pd
 from models import get_ai_response
 from symptom_processor import process_symptoms
 
-# Configure the page
 st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
 # Custom CSS to handle both light and dark modes
 st.markdown("""
     <style>
+            
+        /* Hide the entire toolbar containing Share, GitHub, etc. */
+    .stToolbarActions { 
+        display: none !important; 
+    }
+            
     /* Backgrounds */
     .reportview-container {
         background-color: #F5F7FB;
@@ -107,7 +112,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# App Title and Subheader
 st.title("🧳AI-Powered Health Assistant")
 st.subheader("How can I assist you today?")
 
@@ -120,7 +124,7 @@ def load_health_data():
         st.error(f"Error loading health data: {str(e)}")
         return None
 
-# User input for health/fitness questions
+
 user_input = st.text_area(
     "",
     placeholder="Describe your symptoms or ask about health/fitness advice...",
@@ -128,12 +132,11 @@ user_input = st.text_area(
     key="user_input"
 )
 
-# When the user clicks "Send", load the health data if needed and process the query
 if st.button("Send", key="query_button"):
     if user_input.strip():
         st.markdown("### **AI Response:**")
         with st.spinner("Processing..."):
-            # Lazy load the health data on button click
+            
             df_health = load_health_data()
             
             if df_health is not None:
