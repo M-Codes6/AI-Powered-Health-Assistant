@@ -28,7 +28,6 @@ st.markdown("""
         opacity: 0.5;
     }
 
-
     @media (max-width: 480px) {
         h1 {
             font-size: 1rem;
@@ -56,8 +55,8 @@ st.markdown("""
 
     /* Text Area */
     .stTextArea textarea {
-        min-height: 100px !important;
-        border-radius: 10px !important;
+        min-height: 70px !important;
+        border-radius: 15px !important;
     }
 
     /* Containers */
@@ -91,58 +90,19 @@ st.markdown("""
         background-color: #3DB4A4 !important;
     }
 
-    /* Messages and Alerts */
-    .stSuccess {
-        background-color: #D4EDDA !important;
-        color: #155724 !important;
-        border-radius: 8px !important;
-        padding: 1rem !important;
+    /* Footer links */
+    .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
     }
-    .dark .stSuccess {
-        background-color: #1E4530 !important;
-        color: #C3E6CB !important;
+    .footer a {
+        color: #0077b6;
+        text-decoration: none;
+        margin: 0 10px;
     }
-    .stWarning {
-        background-color: #FFF3CD !important;
-        color: #856404 !important;
-        padding: 1rem !important;
-    }
-    .dark .stWarning {
-        background-color: #4D3F12 !important;
-        color: #FFE082 !important;
-    }
-    .stError {
-        background-color: #F8D7DA !important;
-        color: #721C24 !important;
-        padding: 1rem !important;
-    }
-    .dark .stError {
-        background-color: #4A2326 !important;
-        color: #F5C6CB !important;
-    }
-
-    /* Captions and Text */
-    .stMarkdown {
-        color: #4A4A4A;
-        line-height: 1.6 !important;
-    }
-    .dark .stMarkdown {
-        color: #D0D0D0;
-    }
-    .stCaption {
-        color: #6C757D;
-        font-size: 0.9rem !important;
-    }
-    .dark .stCaption {
-        color: #A0A0A0;
-    }
-
-    /* Spacing Improvements */
-    .stTextInput, .stNumberInput, .stTextArea {
-        margin-bottom: 1rem !important;
-    }
-    .stButton {
-        margin: 0.5rem 0 !important;
+    .footer a:hover {
+        text-decoration: underline;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -153,11 +113,10 @@ st.subheader("How can I assist you today?")
 @st.cache_data
 def load_health_data():
     try:
-        return pd.read_csv("health_data.csv", quoting=1)  
+        return pd.read_csv("health_data.csv", quoting=1)
     except Exception as e:
         st.error(f"Error loading health data: {str(e)}")
         return None
-
 
 df_health = load_health_data()
 
@@ -174,7 +133,7 @@ if st.button("Send", key="query_button"):
         with st.spinner("processing..."):
             if df_health is not None:
                 detected_symptoms, advice = process_symptoms(user_input, df_health)
-                
+
                 if detected_symptoms:
                     st.markdown(f"**Detected Symptoms:** {', '.join(detected_symptoms)}")
                     st.markdown("**Recommendation:**")
@@ -187,7 +146,7 @@ if st.button("Send", key="query_button"):
                 st.warning("Symptom database not available. Using AI response only.")
                 ai_response = get_ai_response(user_input)
                 st.success(ai_response)
-                
+
         st.markdown("---\n*Remember: This is not medical advice. Always consult a professional Doctor for serious concerns.*")
     else:
         st.warning("Please enter your symptoms or question.")
@@ -200,7 +159,7 @@ if st.button("Calculate BMI", key="bmi_button"):
     if weight > 0 and height > 0:
         bmi = weight / (height ** 2)
         st.success(f"Your BMI is {bmi:.2f}")
-        
+
         if bmi < 18.5:
             st.info("You are underweight. Consider a balanced diet and consult a healthcare professional.")
         elif 18.5 <= bmi < 24.9:
@@ -213,3 +172,11 @@ if st.button("Calculate BMI", key="bmi_button"):
         st.warning("Please enter valid weight and height.")
 
 st.caption("Stay safe and healthy! ✨")
+
+# Footer Section
+st.markdown("""
+    <div class="footer">
+        <p> <a href="https://x.com/M_Codes6" target="_blank">X</a> | <a href="https://github.com/M-Codes6" target="_blank">Github</a> | <a href="mailto:naikmuzamil06@gmail.com" target="_blank">G-mail</a>
+    </div>
+""", unsafe_allow_html=True)
+
