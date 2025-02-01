@@ -3,3 +3,4 @@ myenv/
 *.pyc
 *.pyo
 .env
+.streamlit/config.toml
