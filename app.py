@@ -75,18 +75,25 @@ st.markdown("""
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
+        /* Select box container */
+        .stSelectbox {
+            width: 300px !important; /* Set width */
+            margin-top: 10px;  /* Optional margin to separate from elements above */
+        }
+
+        /* Adjusting select box inside the container */
         .stSelectbox select {
-            width: 300px !important;
-            padding: 8px 12px !important;
-            border-radius: 8px !important;
+            width: 100% !important;  /* Ensures the select element takes the full width of its parent container */
+            padding: 8px 12px !important; /* Optional padding */
+            font-size: 1rem !important; /* Font size */
+        }
+
+        /* Optional: Adjust options inside the select box */
+        .stSelectbox option {
             font-size: 1rem !important;
+            padding: 8px 12px !important;
         }
         
-        /* Optional: You can also style the options in the selectbox */
-        .stSelectbox option {
-            padding: 8px;
-            font-size: 1rem;
-        }
 
         /* Buttons */
         .stButton button {
