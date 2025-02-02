@@ -75,8 +75,17 @@ st.markdown("""
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .stSelectbox {
-           width: 300px;
+        .stSelectbox select {
+            width: 300px !important;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            font-size: 1rem !important;
+        }
+        
+        /* Optional: You can also style the options in the selectbox */
+        .stSelectbox option {
+            padding: 8px;
+            font-size: 1rem;
         }
 
         /* Buttons */
@@ -160,8 +169,6 @@ if st.button("Send", key="query_button"):
 
 st.markdown("### **Fitness Tracking: Calculate Your BMI**")
 weight = st.number_input("Enter your weight (kg):", min_value=1.0, format="%.1f", key="weight_input")
-
-# Dropdown to select height unit
 height_unit = st.selectbox("Select your height unit:", ["Meters", "Centimeters", "Feet/Inches"], key="height_unit_select")
 
 height = 0.0
