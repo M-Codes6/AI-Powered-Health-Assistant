@@ -14,7 +14,7 @@ st.markdown("""
 
         /* Backgrounds */
         .reportview-container {
-            background-color: #F5F7FB;
+            background-color: #0e1117;
         }
         .dark .reportview-container {
             background-color: #0A0E14;
@@ -28,7 +28,7 @@ st.markdown("""
         }
         h3 {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.8rem;
             opacity: 0.5;
         }
         @media (max-width: 480px) {
@@ -36,7 +36,7 @@ st.markdown("""
                 font-size: 1rem;
             }
             h3 {
-                font-size: 0.9rem;
+                font-size: 0.6rem;
             }
         }
 
@@ -150,8 +150,8 @@ user_input = st.text_area(
 
 if st.button("Send", key="query_button"):
     if user_input.strip():
-        st.markdown("### **Response:**")
-        with st.spinner("Processing..."):
+        st.markdown("### **Ai-Response:**")
+        with st.spinner("Processing...., plz wait"):
             df_health = load_health_data()
             if df_health is not None:
                 detected_symptoms, advice = process_symptoms(user_input, df_health)
