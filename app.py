@@ -76,13 +76,7 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
             
-    .stSelectbox {
-        widht: 300px;        
-    }
     
-    .stAlert {
-       widht: 300px;
-    }
             
     /* Buttons */
     .stButton button {
