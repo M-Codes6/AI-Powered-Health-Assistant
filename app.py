@@ -74,6 +74,10 @@ st.markdown("""
             background-color: #1A1A1A;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
+        
+        .stSelectbox {
+           width: 300px;
+        }
 
         /* Buttons */
         .stButton button {
