@@ -156,19 +156,23 @@ if st.button("Send", key="query_button"):
 
 
 # Fitness tracking section
+
 st.markdown("### **Fitness Tracking: Calculate Your BMI**")
-weight = st.number_input("Enter your weight (kg):", min_value=1.0, format="%.1f")
-height_unit = st.selectbox("Select your height unit:", ["Meters", "Centimeters", "Feet/Inches"])
+weight = st.number_input("Enter your weight (kg):", min_value=1.0, format="%.1f", key="weight_input")
+height_unit = st.selectbox("Select your height unit:", ["Meters", "Centimeters", "Feet/Inches"], key="height_unit_select")
 
 height = 0.0
 if height_unit == "Meters":
-    height = st.number_input("Enter your height (m):", min_value=0.5, format="%.2f")
+
+    height = st.number_input("Enter your height (m):", min_value=0.5, format="%.2f", key="height_meters_input")
 elif height_unit == "Centimeters":
-    height_cm = st.number_input("Enter your height (cm):", min_value=50, max_value=300, format="%d")
+
+    height_cm = st.number_input("Enter your height (cm):", min_value=50, max_value=300, format="%d", key="height_cm_input")
     height = height_cm / 100  
 else:  
-    feet = st.number_input("Feet:", min_value=0, max_value=9, step=1, format="%d")
-    inches = st.number_input("Inches:", min_value=0, max_value=11, step=1, format="%d")
+
+    feet = st.number_input("Feet:", min_value=0, max_value=9, step=1, format="%d", key="feet_input")
+    inches = st.number_input("Inches:", min_value=0, max_value=11, step=1, format="%d", key="inches_input")
     if feet == 0 and inches == 0:
         st.warning("Height cannot be zero.")
     else:
@@ -177,12 +181,12 @@ else:
 if st.button("Calculate BMI", key="bmi_button"):
     if weight > 0 and height > 0:
         bmi = weight / (height ** 2)
-        st.success(f"Your BMI is {bmi:.1f}")  
+        st.success(f"Your BMI is {bmi:.1f}")
         if bmi < 18.5:
             st.info("Underweight 🚨: Consider a balanced diet and consult a healthcare professional.")
-        elif 18.5 <= bmi < 25: 
+        elif 18.5 <= bmi < 25:  # Fixed range
             st.success("Normal weight ✅: Keep up the great work!")
-        elif 25 <= bmi < 30:  
+        elif 25 <= bmi < 30:  # Fixed range
             st.warning("Overweight ⚠️: Regular exercise and a balanced diet can help.")
         else:
             st.error("Obese ❗: Consult a healthcare professional for personalized advice.")
