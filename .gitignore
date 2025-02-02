@@ -4,3 +4,4 @@ myenv/
 *.pyo
 .env
 .streamlit/config.toml
+health_data.csv

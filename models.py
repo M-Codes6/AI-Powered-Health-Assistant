@@ -1,71 +1,52 @@
 import pandas as pd
+from fuzzywuzzy import process
+import re
 from transformers import pipeline
 import torch
-import re
-from fuzzywuzzy import process
 
-health_data = pd.read_csv('health_data.csv')
-
-health_data.columns = health_data.columns.str.lower()
-
-MEDICAL_PROMPT = """You are a medical assistant. Provide accurate, safe, and concise advice for health symptoms.
-User: {query}
-Assistant:"""
+# Updated medical prompt: instruct the model to answer concisely.
+MEDICAL_PROMPT = (
+    "You are a helpful medical assistant. Provide accurate, safe, and concise advice for health symptoms. "
+    "Answer briefly and clearly.\n"
+    "User: {query}\n"
+    "Assistant:"
+)
 
 def get_ai_response(query):
     try:
+        # Initialize the text-generation pipeline
         generator = pipeline(
             "text-generation",
-            model="distilgpt2",  
+            model="distilgpt2",  # Consider switching to a larger/fine-tuned model if possible.
             torch_dtype=torch.float16,
             device=0 if torch.cuda.is_available() else -1
         )
-
         print(f"Query received: {query}")
         
-        query_clean = re.sub(r'[^a-zA-Z\s]', '', query).lower()  
-        symptoms_in_query = re.split(r'\s+|,| and |&', query_clean)  
-        
-        print(f"Cleaned user input: {query_clean}")
-        
-        matched_symptoms = []
-        advice_list = []
-        
-        for symptom in symptoms_in_query:
-            if symptom:  
-                match, score = process.extractOne(
-                    symptom,
-                    health_data['symptom'].str.lower().tolist(),
-                    score_cutoff=70  
-                )
-                if match:
-                    matched_symptoms.append(match)
-
-                    advice = health_data.loc[
-                        health_data['symptom'].str.lower() == match,
-                        'advice'
-                    ].values[0]
-                    advice_list.append(advice)
-
-        if matched_symptoms:
-
-            return (
-                list(set(matched_symptoms)), 
-                "\n".join(advice_list)  
-            )
-        
-        print("No match found in CSV, using AI model...")
+        # Format the prompt with the user query
+        prompt = MEDICAL_PROMPT.format(query=query)
         response = generator(
-            MEDICAL_PROMPT.format(query=query),
-            max_length=200,
+            prompt,
+            max_length=150,           # Limit the length to keep the response concise.
             num_return_sequences=1,
-            temperature=0.3,
-            do_sample=True,
+            temperature=0.7,          # Moderate temperature for balanced creativity.
+            top_p=0.9,                # Use nucleus sampling to promote diversity.
+            repetition_penalty=1.2,   # Penalize repetition.
+            do_sample=True
         )
+        # Extract generated text
+        generated_text = response[0].get('generated_text', '')
         
-        ai_response = response[0]['generated_text'].split("Assistant:")[-1].strip()
+        # Remove the prompt part if it's still present in the output.
+        if "Assistant:" in generated_text:
+            ai_response = generated_text.split("Assistant:")[-1].strip()
+        else:
+            ai_response = generated_text.strip()
         
-        return ai_response, None
-
+        # Fallback in case no response was generated
+        if not ai_response:
+            ai_response = "I'm sorry, I could not generate an appropriate response."
+        
+        return (ai_response, None)
     except Exception as e:
-        return f"Error generating response: {str(e)}", None
+        return (f"Error generating response: {str(e)}", None)

@@ -115,7 +115,7 @@ st.markdown("""
 st.title("🧳AI-Powered Health Assistant")
 st.subheader("How can I assist you today?")
 
-# Lazy-loaded health data function
+# Lazy-load health data with caching
 @st.cache_data
 def load_health_data():
     try:
@@ -123,7 +123,6 @@ def load_health_data():
     except Exception as e:
         st.error(f"Error loading health data: {str(e)}")
         return None
-
 
 user_input = st.text_area(
     "",
@@ -134,30 +133,30 @@ user_input = st.text_area(
 
 if st.button("Send", key="query_button"):
     if user_input.strip():
-        st.markdown("### **AI Response:**")
+        st.markdown("### **Response:**")
         with st.spinner("Processing..."):
-            
             df_health = load_health_data()
-            
             if df_health is not None:
                 detected_symptoms, advice = process_symptoms(user_input, df_health)
-                if detected_symptoms:
+                # Check if the CSV lookup yielded valid matches (i.e., list is non-empty and advice is not the fallback message)
+                if detected_symptoms and advice != "Sorry, I couldn't find advice based on your input. Let me check with AI.":
                     st.markdown(f"**Detected Symptoms:** {', '.join(detected_symptoms)}")
                     st.markdown("**Recommendation:**")
                     st.success(advice)
                 else:
-                    ai_response = get_ai_response(user_input)
+                    # Unpack the tuple returned by get_ai_response
+                    ai_response, _ = get_ai_response(user_input)
                     st.markdown("**AI-Generated Advice:**")
                     st.success(ai_response)
             else:
                 st.warning("Symptom database not available. Using AI response only.")
-                ai_response = get_ai_response(user_input)
+                ai_response, _ = get_ai_response(user_input)
                 st.success(ai_response)
-        st.markdown("---\n*Remember: This is not medical advice. Always consult a professional Doctor for serious concerns.*")
+        st.markdown("---\n*Remember: This is not medical advice. Always consult a professional doctor for serious concerns.*")
     else:
         st.warning("Please enter your symptoms or question.")
 
-# Fitness Tracking Section for BMI Calculation
+# Fitness Tracking Section for BMI Calculation (unchanged)
 st.markdown("### **Fitness Tracking: Calculate Your BMI**")
 weight = st.number_input("Enter your weight (kg):", min_value=1.0, format="%.1f")
 height = st.number_input("Enter your height (m):", min_value=0.5, format="%.2f")
@@ -179,7 +178,7 @@ if st.button("Calculate BMI", key="bmi_button"):
 
 st.caption("Stay safe and healthy! ✨")
 
-# Footer Section
+# Footer Section (unchanged)
 st.markdown("""
     <div class="footer">
         <p>
