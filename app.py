@@ -31,18 +31,21 @@ st.markdown("""
             margin-top: 20px;
         }
 
-        .stButton>button {
+        .custom-button {
             background-color: #f56a79;
             color: white;
             padding: 0.6rem 1.5rem;
             border-radius: 1rem;
             font-size: 1rem;
             cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease-in-out;
         }
 
-        .stButton>button:hover {
+        .custom-button:hover {
             background-color: #f5425d;
         }
 
@@ -71,8 +74,9 @@ st.title("🧳 Welcome to AI-Powered Health Assistant")
 # App description
 st.markdown('<p class="app-description">Your trusted companion for health advice, fitness tips, and personalized recommendations powered by AI. Stay healthy, stay informed!</p>', unsafe_allow_html=True)
 
-# Centered Get Started Button
-st.markdown('<div class="center-button">', unsafe_allow_html=True)
-if st.button("Get Started"):
-    st.markdown("[Go to Main Page](https://sympai.streamlit.app/main)")
-st.markdown('</div>', unsafe_allow_html=True)
+# Centered Get Started Button with Navigation Link
+st.markdown("""
+    <div class="center-button">
+        <a href="https://sympai.streamlit.app/main" class="custom-button">Get Started</a>
+    </div>
+""", unsafe_allow_html=True)
