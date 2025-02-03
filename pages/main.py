@@ -3,7 +3,6 @@ import pandas as pd
 from models import get_ai_response
 from symptom_processor import process_symptoms
 
-st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
 st.markdown("""
     <style>
@@ -130,7 +129,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🧳AI-Powered Health Assistant")
 st.subheader("How can I assist you today?")
 
 @st.cache_data

@@ -1,7 +1,8 @@
 import streamlit as st
 
+st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
+
 st.title("🧳Welcome to AI-Powered Health Assistant")
-st.image("", caption="Your trusted AI health companion")  
 st.markdown("## Learn more about health, fitness, and personalized advice!")
 
 if st.button("Get Started"):
