@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
+
 # CSS Styling with Animations
 st.markdown("""
     <style>
@@ -63,7 +65,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
 st.title("🧳 Welcome to AI-Powered Health Assistant")
 
