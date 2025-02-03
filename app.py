@@ -49,6 +49,12 @@ st.markdown("""
             background-color: #f5425d;
         }
 
+        /* Remove text decoration for links */
+        .custom-button:link, 
+        .custom-button:visited {
+            text-decoration: none;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
