@@ -74,5 +74,5 @@ st.markdown('<p class="app-description">Your trusted companion for health advice
 # Centered Get Started Button
 st.markdown('<div class="center-button">', unsafe_allow_html=True)
 if st.button("Get Started"):
-    st.query_params.update({"page": "pages/main.py"})
+    st.markdown("[Go to Main Page](https://sympai.streamlit.app/main)")
 st.markdown('</div>', unsafe_allow_html=True)
