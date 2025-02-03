@@ -20,22 +20,16 @@ st.markdown("""
         }
 
         /* Default styles for title and subheader */
-        h1 {
-            text-align: center;
-            font-size: 1.2rem;
-            opacity: 0.6;
-        }
+        
         h3 {
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             opacity: 0.5;
         }
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1rem;
-            }
+            
             h3 {
-                font-size: 0.6rem;
+                font-size: 0.5rem;
             }
         }
 
