@@ -53,6 +53,7 @@ st.markdown("""
         .custom-button:link, 
         .custom-button:visited {
             text-decoration: none;
+            color: #fff;
         }
 
         /* Animations */
