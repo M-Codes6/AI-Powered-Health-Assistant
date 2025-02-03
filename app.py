@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 from models import get_ai_response
 from symptom_processor import process_symptoms
-import time
 
 st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
@@ -153,12 +152,6 @@ if st.button("Send", key="query_button"):
     if user_input.strip():
         st.markdown("### **Ai-Response:**")
         with st.spinner("Processing..."):
-            placeholder = st.empty()  # Create an empty container
-            loading_text = "Processing"
-            for i in range(10):  # Run the animation for 10 cycles
-                dots = "." * (i % 4)  # Cycle through '.', '..', '...', ''
-                placeholder.text(loading_text + dots)
-                time.sleep(0.5)
             df_health = load_health_data()
             if df_health is not None:
                 detected_symptoms, advice = process_symptoms(user_input, df_health)
