@@ -1,7 +1,7 @@
 import streamlit as st
 
-st.title("Welcome to Your Health Assistant App")
-st.image("welcome_image.jpg", caption="Your trusted AI health companion")  # Optional image
+st.title("🧳Welcome to AI-Powered Health Assistant")
+st.image("", caption="Your trusted AI health companion")  
 st.markdown("## Learn more about health, fitness, and personalized advice!")
 
 if st.button("Get Started"):
