@@ -2,7 +2,6 @@ import streamlit as st
 
 st.set_page_config(page_title="AI-Powered Health Assistant", page_icon="🧳")
 
-# CSS Styling with Animations
 st.markdown("""
     <style>
         /* Hide the entire toolbar containing Share, GitHub, etc. */
@@ -24,13 +23,16 @@ st.markdown("""
             color: #555;
         }
 
-        /* Button Styling */
+        /* Center container for button and spinner */
         .center-button {
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             margin-top: 20px;
         }
 
+        /* Button Styling */
         .custom-button {
             background-color: #f56a79;
             color: white;
@@ -56,6 +58,21 @@ st.markdown("""
             color: #fff;
         }
 
+        /* Spinner Styling */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #f56a79; /* Custom color */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 5px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -75,15 +92,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
 st.title("🧳 Welcome to AI-Powered Health Assistant")
-
-# App description
 st.markdown('<p class="app-description">Your trusted companion for health advice, fitness tips, and personalized recommendations powered by AI. Stay healthy, stay informed!</p>', unsafe_allow_html=True)
 
-# Centered Get Started Button with Navigation Link
+# Centered Get Started Button with Spinner
 st.markdown("""
     <div class="center-button">
-        <a href="https://sympai.streamlit.app/main" class="custom-button">Get Started</a>
+        <a href="https://sympai.streamlit.app/main" class="custom-button" id="getStartedBtn" onclick="document.getElementById('spinnerDiv').style.display='block'">
+            Get Started
+        </a>
+        <div id="spinnerDiv" style="display: none; margin-top: 10px; text-align: center;">
+            <div class="loader"></div>
+            <p>Hold on, we are loading page for you</p>
+        </div>
     </div>
 """, unsafe_allow_html=True)
