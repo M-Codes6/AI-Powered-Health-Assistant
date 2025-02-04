@@ -95,7 +95,7 @@ st.markdown("""
 st.title("🧳 Welcome to AI-Powered Health Assistant")
 st.markdown('<p class="app-description">Your trusted companion for health advice, fitness tips, and personalized recommendations powered by AI. Stay healthy, stay informed!</p>', unsafe_allow_html=True)
 
-# Centered Get Started Button with Spinner
+
 st.markdown("""
     <div class="center-button">
         <a href="https://sympai.streamlit.app/main" class="custom-button" id="getStartedBtn" onclick="document.getElementById('spinnerDiv').style.display='block'">
