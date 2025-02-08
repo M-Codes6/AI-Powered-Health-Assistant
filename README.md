@@ -1,5 +1,8 @@
 # AI Health Assistant
 
+# Live Project Link
+https://sympai.streamlit.app/
+
 # Overview
    The AI Health Assistant is a Python-based application that provides health advice to users based on symptom detection. By leveraging machine learning models and 
    natural language processing techniques, the assistant offers intelligent insights and symptom-based recommendations. This project was developed as part of the AICTE 
