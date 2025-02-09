@@ -4,26 +4,25 @@
 https://sympai.streamlit.app/
 
 # Overview
-   The AI Health Assistant is a Python-based application that provides health advice to users based on symptom detection. By leveraging machine learning models and 
-   natural language processing techniques, the assistant offers intelligent insights and symptom-based recommendations. This project was developed as part of the AICTE 
-   Internship on AI: Transformative Learning with TechSaksham, a joint CSR initiative by Microsoft and SAP.
+  The AI Health Assistant is a Python-based application that provides health advice to users based on symptom detection. By leveraging machine learning models and natural language processing techniques, the assistant offers intelligent insights and symptom-based recommendations. This project was developed as part of the AICTE Internship on AI: Transformative Learning with TechSaksham, a joint CSR initiative by Microsoft and SAP.
+
 
 # Key Features
 
-**Symptom Detection**: Detects user symptoms and provides relevant health advice.
-**Pretrained AI Model**: Utilizes cutting-edge machine learning models from the transformers library for natural language processing tasks.
-**Efficient Data Handling**: Handles and processes health-related data efficiently using pandas and numpy.
-**User-Friendly Interface**: Built with Streamlit for an interactive and intuitive user experience.
-**Fuzzy Matching**: Integrates fuzzywuzzy for enhanced text matching capabilities.
+**Symptom Detection:** Detects user symptoms and provides relevant health advice.
+**Pretrained AI Model:** Utilizes cutting-edge machine learning models from the transformers library for natural language processing tasks.
+**Efficient Data Handling:** Handles and processes health-related data efficiently using pandas and numpy.
+**User-Friendly Interface:** Built with Streamlit for an interactive and intuitive user experience.
+**Fuzzy Matching:** Integrates fuzzywuzzy for enhanced text matching capabilities.
 
 # Project Structure
-Ai-Chatbot
-├── app.py                 # Main application entry point
-├── health_data.csv         # Health-related dataset
-├── models.py               # Pretrained model loading and handling
-├── requirements.txt        # Project dependencies
-├── symptom_processor.py    # Symptom processing logic
-└── __pycache__/            # Cached files (excluded from version control)
+AI-Powered-Health-Assistant
+├── app.py               # Main application entry point
+├── health_data.csv       # Health-related dataset
+├── models.py             # Pretrained model loading and handling
+├── requirements.txt      # Project dependencies
+├── symptom_processor.py  # Symptom processing logic
+└── __pycache__/          # Cached files (excluded from version control)
 
 # Technologies Used
    Programming Language: Python
@@ -72,7 +71,13 @@ Ai-Chatbot
    Deployment as a cloud-based service.
 
 # Contributing
-   Contributions are welcome! Please fork the repository and submit a pull request for any improvements.
+  Contributions are welcome! Please follow these steps:
+
+**Fork the repository.**
+Create a new branch for your feature: git checkout -b feature/your-feature-name
+Commit your changes: git commit -m "Add your feature description"
+Push to your branch: git push origin feature/your-feature-name
+Open a pull request.
 
 # License
    This project is licensed under the MIT License.
